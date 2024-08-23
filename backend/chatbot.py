@@ -13,28 +13,29 @@ INIT_PROMPT = " You are a helpful and knowledgeable assistant specializing in pr
 # Initialize the conversation history with the initial prompt to give model better context with follow up questions
 # TODO optimize this to delete older messages after a certain point to reduce TOKEN usage
 
-conversation_history = [
-    {"role": "system", "content": INIT_PROMPT}
-]
+# conversation_history = [
+#     {"role": "system", "content": INIT_PROMPT}
+# ]
 
-def get_gpt4_response(USER_PROMPT):
-    global conversation_history
+def get_gpt4_response(history : list):
     
+    print("History:", history)
     try:
 
-        conversation_history.append({"role": "user", "content": USER_PROMPT})
+        
 
         # Make a request to the GPT-4 model
         response = client.chat.completions.create(
             model = MODEL,
-            messages = conversation_history
+            messages = history,
+
         )
 
         models_response = response.choices[0].message.content
 
-        conversation_history.append({"role": "system", "content": models_response})
+        history.append({"role": "system", "content": models_response})
+        print(history)
 
-        print(conversation_history)
 
         return models_response
     
