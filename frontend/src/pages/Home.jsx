@@ -20,7 +20,7 @@ const Home = () => {
               Answer Questionnaire
             </Link>
             <Link
-              to="/"
+              to="/chat"
               className="rounded-md bg-blue-500 px-4 py-2 text-white transition duration-300 ease-in-out hover:-translate-y-1 hover:bg-blue-600"
             >
               Chat with AI
