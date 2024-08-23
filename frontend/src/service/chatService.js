@@ -4,7 +4,7 @@ const BACKEND_API = "http://127.0.0.1:5000/api/chat";
 
 class chatService {
   sendMessage(message) {
-    return axios.post(BACKEND_API, { message });
+    return axios.post(BACKEND_API, { message: message });
   }
 }
 

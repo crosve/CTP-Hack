@@ -33,7 +33,10 @@ const ChatInterface = ({ apiServer }) => {
         .sendMessage(newMessage)
         .then((response) => {
           console.log(response);
-          setMessages((prevMessages) => [...prevMessages, response.data]);
+          setMessages((prevMessages) => [
+            ...prevMessages,
+            response.data.message,
+          ]);
           setLoading(false);
         })
         .catch((error) => {
@@ -41,6 +44,8 @@ const ChatInterface = ({ apiServer }) => {
           setLoading(false);
           setError(error.message);
         });
+
+      console.log("messages", messages);
 
       setNewMessage("");
 
