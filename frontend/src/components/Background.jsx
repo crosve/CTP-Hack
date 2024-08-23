@@ -11,7 +11,7 @@ const Background = ({ children }) => {
       }}
       className="flex min-h-screen flex-col"
     >
-      <div className="absolute inset-0 bg-blue-900 bg-opacity-80"></div>
+      <div className="absolute inset-0 bg-blue-900 bg-opacity-70"></div>
       <div className="relative flex flex-grow flex-col">{children}</div>
     </div>
   );
