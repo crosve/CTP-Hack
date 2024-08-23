@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import Background from "../components/Background";
 import Navbar from "../components/NavBar";
+import { CUNY_RESOURCES } from "../data/CunyResources";
 
 const NYC_COORDINATES = [40.7128, -74.006];
 
@@ -11,15 +12,15 @@ const BOUNDS = [
   [40.917577, -73.700272],
 ];
 
-const CUNY_RESOURCES = [
-  {
-    name: "test",
-    coordinates: [40.7128, -74.006],
-    description: "test desc",
-  },
-];
-
 const MapPage = () => {
+  const [activeResource, setActiveResource] = useState(null);
+  const markerRefs = useRef([]);
+
+  const handleListItemClick = (index) => {
+    setActiveResource(index === activeResource ? null : index);
+    markerRefs.current[index].openPopup();
+  };
+
   return (
     <Background>
       <Navbar />
@@ -38,7 +39,11 @@ const MapPage = () => {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             {CUNY_RESOURCES.map((resource, index) => (
-              <Marker key={index} position={resource.coordinates}>
+              <Marker
+                key={index}
+                position={resource.coordinates}
+                ref={(el) => (markerRefs.current[index] = el)}
+              >
                 <Popup>
                   <span className="font-semibold">{resource.name}</span>
                   <br />
@@ -49,19 +54,29 @@ const MapPage = () => {
           </MapContainer>
         </div>
         <div className="h-[85vh] w-full overflow-auto rounded-md bg-white p-8 md:w-[35%] md:rounded-bl-none md:rounded-br-md md:rounded-tl-none md:rounded-tr-md">
-          <h2 className="mb-4 text-2xl font-bold">Lorem ipsum</h2>
-          <h3 className="mb-2 block text-xl font-semibold text-red-600 sm:hidden">
-            The leaflet map is only available on a larger device.
-          </h3>
-          <p className="text-lg">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </p>
+          <h2 className="mb-4 text-2xl font-bold">CUNY Resources</h2>
+          <ul>
+            {CUNY_RESOURCES.map((resource, index) => (
+              <li
+                key={index}
+                className={`cursor-pointer rounded-md p-2 ${
+                  activeResource === index
+                    ? "bg-blue-200"
+                    : "bg-white hover:bg-gray-100"
+                }`}
+                onClick={() => handleListItemClick(index)}
+              >
+                <div>
+                  <span className="font-semibold">{resource.name}</span>
+                  {activeResource === index && (
+                    <div className="mt-2 text-sm text-gray-700">
+                      {resource.description}
+                    </div>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </Background>
