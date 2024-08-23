@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import Background from "../components/Background";
 import Navbar from "../components/NavBar";
-import { CUNY_RESOURCES } from "../data/CunyResources";
+import { CUNY_RESOURCES } from "../data/cunyResources";
 
 const NYC_COORDINATES = [40.7128, -74.006];
 
