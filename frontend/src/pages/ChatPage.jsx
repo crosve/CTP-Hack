@@ -33,7 +33,7 @@ const ChatInterface = ({ apiServer }) => {
         .sendMessage(newMessage)
         .then((response) => {
           console.log(response);
-          setMessages((prevMessages) => [...prevMessages, response.message]);
+          setMessages((prevMessages) => [...prevMessages, response.data]);
           setLoading(false);
         })
         .catch((error) => {
