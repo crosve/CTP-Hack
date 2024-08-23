@@ -2,18 +2,148 @@ import React, { useState } from "react";
 import Background from "../components/Background";
 import Navbar from "../components/NavBar";
 import chatService from "../service/chatService";
-
 const ChatInterface = ({ apiServer }) => {
+  const [newMessage, setNewMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  // Define the handleCommonQuestions function here, before using it in JSX
+  const handleCommonQuestions = (e) => {
+    const userMessage = {
+      text: e.target.getAttribute("value"),
+      timestamp: new Date().toISOString(),
+      type: "user",
+    };
+
+    setMessages((prevMessages) => [...prevMessages, userMessage]);
+
+    setLoading(true);
+
+    // Simulate API call and response
+    chatService
+      .sendMessage(e.target.getAttribute("value"))
+      .then((response) => {
+        console.log(response);
+        setMessages((prevMessages) => [...prevMessages, response.data.message]);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+        setError(error.message);
+      });
+
+    setNewMessage("");
+  };
   const [messages, setMessages] = useState([
     {
-      text: "Hello! Please let me know how I can help.",
+      text: (
+        <>
+          Hello! Please let me know how I can help.
+          <br />
+          <a
+            href="https://example.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            test
+          </a>
+        </>
+      ),
+      timestamp: new Date().toISOString(),
+      type: "system",
+    },
+    {
+      text: (
+        <>
+          Some common asked questions are:
+          <br />
+        </>
+      ),
+      timestamp: new Date().toISOString(),
+      type: "system",
+    },
+    {
+      text: (
+        <>
+          <h1
+            className="cursor-pointer"
+            onClick={handleCommonQuestions}
+            value="What are some internship opportunities available from CUNY?"
+          >
+            What are some internship opportunities available from CUNY?
+          </h1>
+          <br />
+        </>
+      ),
+      timestamp: new Date().toISOString(),
+      type: "system",
+    },
+    {
+      text: (
+        <>
+          <h1
+            className="cursor-pointer"
+            onClick={handleCommonQuestions}
+            value="How can I apply for financial aid?"
+          >
+            How can I apply for financial aid?
+          </h1>
+          <br />
+        </>
+      ),
+      timestamp: new Date().toISOString(),
+      type: "system",
+    },
+    {
+      text: (
+        <>
+          <h1
+            className="cursor-pointer"
+            onClick={handleCommonQuestions}
+            value="What are some food resources available for students?"
+          >
+            What are some food resources available for students?
+          </h1>
+          <br />
+        </>
+      ),
       timestamp: new Date().toISOString(),
       type: "system",
     },
   ]);
-  const [newMessage, setNewMessage] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  // const [newMessage, setNewMessage] = useState("");
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(null);
+
+  // // Define the handleCommonQuestions function here, before using it in JSX
+  // const handleCommonQuestions = (e) => {
+  //   const userMessage = {
+  //     text: e.target.getAttribute("value"),
+  //     timestamp: new Date().toISOString(),
+  //     type: "user",
+  //   };
+
+  //   setMessages((prevMessages) => [...prevMessages, userMessage]);
+
+  //   setLoading(true);
+
+  //   // Simulate API call and response
+  //   chatService
+  //     .sendMessage(e.target.getAttribute("value"))
+  //     .then((response) => {
+  //       console.log(response);
+  //       setMessages((prevMessages) => [...prevMessages, response.data.message]);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setLoading(false);
+  //       setError(error.message);
+  //     });
+
+  //   setNewMessage("");
+  // };
 
   const sendMessage = async () => {
     if (newMessage.trim()) {
@@ -28,7 +158,6 @@ const ChatInterface = ({ apiServer }) => {
       setLoading(true);
 
       // Simulate API call and response
-
       chatService
         .sendMessage(newMessage)
         .then((response) => {
@@ -45,11 +174,7 @@ const ChatInterface = ({ apiServer }) => {
           setError(error.message);
         });
 
-      console.log("messages", messages);
-
       setNewMessage("");
-
-      // The commented out should be the actual sendMessages once the OpenAI backend is integrated. This current function is just for simulation purposes.
     }
   };
 
@@ -78,6 +203,12 @@ const ChatInterface = ({ apiServer }) => {
                 {msg.text}
               </div>
             ))}
+
+            {loading && (
+              <div className="max-w-[75%] animate-pulse self-start rounded-2xl bg-gray-200 p-3 text-base text-gray-400 shadow-md">
+                Loading...
+              </div>
+            )}
           </div>
           <div className="flex items-center border-t border-gray-300 bg-gray-100 p-3 shadow-inner">
             <input
