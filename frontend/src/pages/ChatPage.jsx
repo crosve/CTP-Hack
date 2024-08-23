@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Background from "../components/Background";
 import Navbar from "../components/NavBar";
+import chatService from "../service/chatService";
 
 const ChatInterface = ({ apiServer }) => {
   const [messages, setMessages] = useState([
@@ -12,6 +13,7 @@ const ChatInterface = ({ apiServer }) => {
   ]);
   const [newMessage, setNewMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const sendMessage = async () => {
     if (newMessage.trim()) {
@@ -22,19 +24,30 @@ const ChatInterface = ({ apiServer }) => {
       };
 
       setMessages((prevMessages) => [...prevMessages, userMessage]);
-      setNewMessage("");
+
       setLoading(true);
 
       // Simulate API call and response
-      setTimeout(() => {
-        const systemResponse = {
-          text: "This is random text in return.",
-          timestamp: new Date().toISOString(),
-          type: "system",
-        };
-        setMessages((prevMessages) => [...prevMessages, systemResponse]);
-        setLoading(false);
-      }, 1000);
+
+      chatService
+        .sendMessage(newMessage)
+        .then((response) => {
+          console.log(response);
+          setMessages((prevMessages) => [
+            ...prevMessages,
+            response.data.message,
+          ]);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setLoading(false);
+          setError(error.message);
+        });
+
+      console.log("messages", messages);
+
+      setNewMessage("");
 
       // The commented out should be the actual sendMessages once the OpenAI backend is integrated. This current function is just for simulation purposes.
     }
