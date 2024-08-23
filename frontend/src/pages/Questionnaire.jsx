@@ -58,9 +58,9 @@ const Questionnaire = () => {
   return (
     <Background>
       <Navbar />
-      <div className="flex flex-grow items-center justify-center">
-        <div className="mt-[-100px] w-full max-w-4xl rounded-lg bg-white p-20">
-          <h2 className="mb-8 text-center text-4xl font-bold text-blue-900">
+      <div className="m-4 flex flex-grow items-center justify-center">
+        <div className="mt-[-100px] w-full max-w-4xl rounded-md bg-white p-20">
+          <h2 className="mb-12 text-center text-4xl font-bold text-blue-900">
             {submitted ? "Submitted" : "Questionnaire"}
           </h2>
           {!submitted ? (
