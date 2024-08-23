@@ -48,12 +48,18 @@ const Questionnaire = () => {
               <p className="text-xl font-semibold">
                 {currentQuestion + 1}. {questions[currentQuestion].question}
               </p>
-              <MultipleChoice
-                question={`question${currentQuestion + 1}`}
-                options={questions[currentQuestion].options}
-                value={responses[`question${currentQuestion + 1}`]}
-                onChange={handleOptionChange}
-              />
+              <div className="grid grid-cols-2 gap-4">
+                {questions[currentQuestion].options.map((option, index) => (
+                  <MultipleChoice
+                    key={index}
+                    question={`question${currentQuestion + 1}`}
+                    option={option}
+                    value={responses[`question${currentQuestion + 1}`]}
+                    onChange={handleOptionChange}
+                    index={index}
+                  />
+                ))}
+              </div>
             </div>
           ) : (
             <p className="text-center text-lg font-semibold text-blue-700">

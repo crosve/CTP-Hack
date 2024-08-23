@@ -189,7 +189,7 @@ const ChatInterface = ({ apiServer }) => {
     <Background>
       <Navbar />
       <div className="relative flex flex-grow items-center justify-center">
-        <div className="mx-auto my-5 flex h-[80vh] w-full max-w-lg flex-col overflow-hidden rounded-lg border border-gray-300 bg-white shadow-lg">
+        <div className="mx-auto my-5 flex h-[80vh] w-full max-w-6xl flex-col overflow-hidden rounded-lg border border-gray-300 bg-white shadow-lg">
           <div className="flex flex-1 flex-col gap-3 overflow-y-auto bg-white p-5">
             {messages.map((msg, index) => (
               <div
