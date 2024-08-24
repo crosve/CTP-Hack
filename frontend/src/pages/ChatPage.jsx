@@ -100,6 +100,12 @@ const ChatPage = ({ apiServer }) => {
   useEffect(() => {
     if (location.state && location.state.responses) {
       const { responses } = location.state;
+      setLoading(true);
+      chatService.getQuestionare(responses).then((response) => {
+        console.log(response);
+        setMessages((prevMessages) => [...prevMessages, response.data.message]);
+        setLoading(false);
+      });
       console.log("Received responses:", responses);
     }
   }, [location.state]);
