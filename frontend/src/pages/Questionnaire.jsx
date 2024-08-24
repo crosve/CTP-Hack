@@ -4,7 +4,6 @@ import Background from "../components/Background";
 import Navbar from "../components/NavBar";
 import MultipleChoice from "../components/MultipleChoice";
 import { questions } from "../data/questionnaireQuestions";
-import chatService from "../service/chatService";
 
 const Questionnaire = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -38,17 +37,10 @@ const Questionnaire = () => {
       setCurrentQuestion(currentQuestion + 1);
     } else {
       setSubmitted(true);
-
-      chatService.getQuestionare(responses).then((response) => {
-        console.log(response);
-      });
-
-      // setTimeout(() => {
-      //   console.log({
-      //     ...responses,
-      //     [questionKey]: selectedOption,
-      //   });
-      // }, 250);
+      setTimeout(() => {
+        console.log(responses);
+        navigate("/chat", { state: { responses } });
+      }, 250);
     }
   };
 

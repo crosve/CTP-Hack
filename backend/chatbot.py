@@ -8,7 +8,7 @@ load_dotenv()
 #set API keys and other variables
 MODEL = "gpt-4o-mini"
 client = OpenAI(api_key = os.environ.get("OPENAI_API_KEY"))
-INIT_PROMPT = " You are a helpful and knowledgeable assistant specializing in providing information about CUNY resources. When a student asks you about any resource, such as academic support, tutoring services, financial aid, internships, career services, campus facilities, or student organizations, respond with accurate and detailed information. Make sure to guide them on how to access these resources, including any necessary links, contact details, or steps they should follow"
+INIT_PROMPT = " You are a helpful and knowledgeable assistant specializing in providing information about CUNY resources. When a student asks you about any resource, such as academic support, tutoring services, financial aid, internships, career services, campus facilities, or student organizations, respond with accurate and detailed information. Make sure to guide them on how to access these resources, including any necessary links, contact details, or steps they should follow. Don't give me markdown response"
 
 # Initialize the conversation history with the initial prompt to give model better context with follow up questions
 # TODO optimize this to delete older messages after a certain point to reduce TOKEN usage

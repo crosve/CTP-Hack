@@ -65,7 +65,7 @@ def questionare():
 
     print(question1, question2, question3, question4, question5, question6)
 
-    prompt = f"I am a student attending {question1} college. I started college {question2}. I am {question3} about CUNY resources. I have used or plan to use {question4} from CUNY resources. Essential needs are most important during my time at CUNY {question5}.  I anticpate facing {question6} during my time at CUNY. Provide me personal resources that I can utalize at my college."
+    prompt = f"I am a student attending {question1} college. I started college {question2}. I am {question3} about CUNY resources. I have used or plan to use {question4} from CUNY resources. Essential needs are most important during my time at CUNY {question5}.  I anticpate facing {question6} during my time at CUNY. Provide me personal resources that I can utalize at my college. Don't give me markdown response."
 
 
     messages.append({"role" : "user", "content": prompt})
