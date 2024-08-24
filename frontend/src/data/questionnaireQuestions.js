@@ -4,26 +4,26 @@ export const questions = [
     options: [
       "Baruch College",
       "Brooklyn College",
-      "City College of New York (CCNY)",
+      "City College of New York",
       "Hunter College",
       "Queens College",
-      "BMCC",
-      "Bronx Community College",
       "College of Staten Island",
-      "Craig Newmark Graduate School of Journalism",
-      "CUNY Graduate Center",
-      "Guttman Community College",
       "Other",
     ],
   },
   {
     question: "Year of Entry:",
-    options: ["Fall 2024", "Spring 2025", "Other"],
+    options: ["Earlier", "Fall 2024", "Spring 2025", "Other"],
   },
   {
     question:
       "How aware are you of the various resources CUNY offers to meet students’ essential needs?",
-    options: ["Not aware at all", "Somewhat aware", "Very aware"],
+    options: [
+      "Not aware at all",
+      "Slightly aware",
+      "Somewhat aware",
+      "Very aware",
+    ],
   },
   {
     question:
