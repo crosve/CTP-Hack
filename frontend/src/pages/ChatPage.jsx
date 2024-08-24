@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import Background from "../components/Background";
 import Navbar from "../components/NavBar";
 import chatService from "../service/chatService";
 
 const ChatPage = ({ apiServer }) => {
+  const location = useLocation();
   const [newMessage, setNewMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -94,6 +96,13 @@ const ChatPage = ({ apiServer }) => {
       type: "system",
     },
   ]);
+
+  useEffect(() => {
+    if (location.state && location.state.responses) {
+      const { responses } = location.state;
+      console.log("Received responses:", responses);
+    }
+  }, [location.state]);
 
   useEffect(() => {
     scrollToBottom();

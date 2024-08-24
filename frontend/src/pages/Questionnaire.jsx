@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Background from "../components/Background";
 import Navbar from "../components/NavBar";
 import MultipleChoice from "../components/MultipleChoice";
@@ -9,19 +10,32 @@ const Questionnaire = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [responses, setResponses] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate();
 
   const handleOptionChange = (selectedOption) => {
     const questionKey = `question${currentQuestion + 1}`;
 
-    setResponses((prevResponses) => ({
-      ...prevResponses,
-      [questionKey]: selectedOption,
-    }));
+    setResponses((prevResponses) => {
+      const selectedOptions = prevResponses[questionKey] || [];
+      if (selectedOptions.includes(selectedOption)) {
+        return {
+          ...prevResponses,
+          [questionKey]: selectedOptions.filter(
+            (option) => option !== selectedOption,
+          ),
+        };
+      } else {
+        return {
+          ...prevResponses,
+          [questionKey]: [...selectedOptions, selectedOption],
+        };
+      }
+    });
+  };
 
+  const handleSubmit = () => {
     if (currentQuestion < questions.length - 1) {
-      setTimeout(() => {
-        setCurrentQuestion(currentQuestion + 1);
-      }, 250);
+      setCurrentQuestion(currentQuestion + 1);
     } else {
       setSubmitted(true);
 
@@ -60,11 +74,21 @@ const Questionnaire = () => {
                     key={index}
                     question={`question${currentQuestion + 1}`}
                     option={option}
-                    value={responses[`question${currentQuestion + 1}`]}
+                    selectedOptions={
+                      responses[`question${currentQuestion + 1}`] || []
+                    }
                     onChange={handleOptionChange}
                     index={index}
                   />
                 ))}
+              </div>
+              <div className="flex justify-end">
+                <button
+                  onClick={handleSubmit}
+                  className="mt-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700"
+                >
+                  Next
+                </button>
               </div>
             </div>
           ) : (
