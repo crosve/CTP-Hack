@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Background from "../components/Background";
 import Navbar from "../components/NavBar";
 import MultipleChoice from "../components/MultipleChoice";
@@ -8,6 +9,7 @@ const Questionnaire = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [responses, setResponses] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate();
 
   const handleOptionChange = (selectedOption) => {
     const questionKey = `question${currentQuestion + 1}`;
@@ -37,6 +39,7 @@ const Questionnaire = () => {
       setSubmitted(true);
       setTimeout(() => {
         console.log(responses);
+        navigate("/chat", { state: { responses } });
       }, 250);
     }
   };
