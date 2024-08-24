@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import Background from "../components/Background";
 import Navbar from "../components/NavBar";
 import chatService from "../service/chatService";
-const ChatInterface = ({ apiServer }) => {
+
+const ChatPage = ({ apiServer }) => {
   const [newMessage, setNewMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Define the handleCommonQuestions function here, before using it in JSX
   const handleCommonQuestions = (e) => {
     const userMessage = {
       text: e.target.getAttribute("value"),
@@ -39,24 +39,8 @@ const ChatInterface = ({ apiServer }) => {
     {
       text: (
         <>
-          Hello! Please let me know how I can help.
-          <br />
-          <a
-            href="https://example.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            test
-          </a>
-        </>
-      ),
-      timestamp: new Date().toISOString(),
-      type: "system",
-    },
-    {
-      text: (
-        <>
-          Some common asked questions are:
+          Hello! Please let me know how I can help, some commonly asked
+          questions are:
           <br />
         </>
       ),
@@ -67,13 +51,12 @@ const ChatInterface = ({ apiServer }) => {
       text: (
         <>
           <h1
-            className="cursor-pointer"
+            className="cursor-pointer underline hover:text-blue-900"
             onClick={handleCommonQuestions}
             value="What are some internship opportunities available from CUNY?"
           >
             What are some internship opportunities available from CUNY?
           </h1>
-          <br />
         </>
       ),
       timestamp: new Date().toISOString(),
@@ -83,13 +66,12 @@ const ChatInterface = ({ apiServer }) => {
       text: (
         <>
           <h1
-            className="cursor-pointer"
+            className="cursor-pointer underline hover:text-blue-900"
             onClick={handleCommonQuestions}
             value="How can I apply for financial aid?"
           >
             How can I apply for financial aid?
           </h1>
-          <br />
         </>
       ),
       timestamp: new Date().toISOString(),
@@ -99,13 +81,12 @@ const ChatInterface = ({ apiServer }) => {
       text: (
         <>
           <h1
-            className="cursor-pointer"
+            className="cursor-pointer underline hover:text-blue-900"
             onClick={handleCommonQuestions}
             value="What are some food resources available for students?"
           >
             What are some food resources available for students?
           </h1>
-          <br />
         </>
       ),
       timestamp: new Date().toISOString(),
@@ -234,4 +215,4 @@ const ChatInterface = ({ apiServer }) => {
   );
 };
 
-export default ChatInterface;
+export default ChatPage;
