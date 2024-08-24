@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Background from "../components/Background";
 import Navbar from "../components/NavBar";
 import chatService from "../service/chatService";
@@ -7,6 +7,7 @@ const ChatPage = ({ apiServer }) => {
   const [newMessage, setNewMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const messagesEndRef = useRef(null);
 
   const handleCommonQuestions = (e) => {
     const userMessage = {
@@ -19,7 +20,6 @@ const ChatPage = ({ apiServer }) => {
 
     setLoading(true);
 
-    // Simulate API call and response
     chatService
       .sendMessage(e.target.getAttribute("value"))
       .then((response) => {
@@ -35,6 +35,7 @@ const ChatPage = ({ apiServer }) => {
 
     setNewMessage("");
   };
+
   const [messages, setMessages] = useState([
     {
       text: (
@@ -93,38 +94,14 @@ const ChatPage = ({ apiServer }) => {
       type: "system",
     },
   ]);
-  // const [newMessage, setNewMessage] = useState("");
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState(null);
 
-  // // Define the handleCommonQuestions function here, before using it in JSX
-  // const handleCommonQuestions = (e) => {
-  //   const userMessage = {
-  //     text: e.target.getAttribute("value"),
-  //     timestamp: new Date().toISOString(),
-  //     type: "user",
-  //   };
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
-  //   setMessages((prevMessages) => [...prevMessages, userMessage]);
-
-  //   setLoading(true);
-
-  //   // Simulate API call and response
-  //   chatService
-  //     .sendMessage(e.target.getAttribute("value"))
-  //     .then((response) => {
-  //       console.log(response);
-  //       setMessages((prevMessages) => [...prevMessages, response.data.message]);
-  //       setLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       setLoading(false);
-  //       setError(error.message);
-  //     });
-
-  //   setNewMessage("");
-  // };
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const sendMessage = async () => {
     if (newMessage.trim()) {
@@ -138,7 +115,6 @@ const ChatPage = ({ apiServer }) => {
 
       setLoading(true);
 
-      // Simulate API call and response
       chatService
         .sendMessage(newMessage)
         .then((response) => {
@@ -184,12 +160,7 @@ const ChatPage = ({ apiServer }) => {
                 {msg.text}
               </div>
             ))}
-
-            {loading && (
-              <div className="max-w-[75%] animate-pulse self-start rounded-2xl bg-gray-200 p-3 text-base text-gray-400 shadow-md">
-                Loading...
-              </div>
-            )}
+            <div ref={messagesEndRef} />
           </div>
           <div className="flex items-center border-t border-gray-300 bg-gray-100 p-3 shadow-inner">
             <input
