@@ -24,7 +24,7 @@ def get_gpt4_response(history : list):
 
         
 
-        # Make a request to the GPT-4 model
+        # Make a request to the GPT-4 modell
         response = client.chat.completions.create(
             model = MODEL,
             messages = history,
