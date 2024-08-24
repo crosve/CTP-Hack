@@ -54,3 +54,4 @@ def get_gpt4_response(history : list):
 
 print(get_gpt4_response("can you tell me 2 resources for tutoring services in CCNY?"))
 print(get_gpt4_response("what about financial aid options?"))
+
