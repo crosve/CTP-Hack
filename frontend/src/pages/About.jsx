@@ -1,7 +1,6 @@
 import React from "react";
 import Navbar from "../components/NavBar";
 import Background from "../components/Background";
-import { FaReact } from "react-icons/fa";
 import { MdOutlineSchool } from "react-icons/md";
 import { AiOutlineFundProjectionScreen, AiOutlineTeam } from "react-icons/ai";
 import { RiRobot2Line } from "react-icons/ri";
@@ -32,9 +31,9 @@ const About = () => {
               <div>
                 <h2 className="font-semibold">Hackathon Project</h2>
                 <p className="text-sm text-gray-600">
-                  Developed as part of the CUNY "Essential Needs" for Student
-                  Success Hackathon, our platform aims to leverage digital tools
-                  to connect students with vital resources and support systems.
+                  Developed as part of the CTP HACK 2024 Hackathon, our platform
+                  aims to leverage digital tools to connect students with vital
+                  resources and support systems.
                 </p>
               </div>
             </div>
@@ -70,8 +69,8 @@ const About = () => {
                 <h2 className="font-semibold">Collaborative Effort</h2>
                 <p className="text-sm text-gray-600">
                   Built by a passionate team of developers with expertise in
-                  React, Python, Node.js, and more, we are dedicated to making
-                  CUNY resources more accessible to every student.
+                  React, Python, and more, we are dedicated to making CUNY
+                  resources more accessible to every student.
                 </p>
               </div>
             </div>

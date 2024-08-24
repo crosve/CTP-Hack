@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import Background from "../components/Background";
 import Navbar from "../components/NavBar";
 import chatService from "../service/chatService";
-const ChatInterface = ({ apiServer }) => {
+
+const ChatPage = ({ apiServer }) => {
   const [newMessage, setNewMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Define the handleCommonQuestions function here, before using it in JSX
   const handleCommonQuestions = (e) => {
     const userMessage = {
       text: e.target.getAttribute("value"),
@@ -234,4 +234,4 @@ const ChatInterface = ({ apiServer }) => {
   );
 };
 
-export default ChatInterface;
+export default ChatPage;
