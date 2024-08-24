@@ -89,6 +89,14 @@ const MapPage = () => {
                     <span className="font-semibold">{resource.name}</span>
                     <br />
                     {resource.description}
+                    <br />
+                    <a
+                      href={resource.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Visit Page
+                    </a>
                   </Popup>
                 </Marker>
               ))}
