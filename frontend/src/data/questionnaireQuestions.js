@@ -83,9 +83,4 @@ export const questions = [
       "Other",
     ],
   },
-  {
-    question:
-      "How likely are you to use a CUNY mobile app or website specifically designed to help you access essential resources?",
-    options: ["Very likely", "Somewhat likely", "Not likely"],
-  },
 ];
