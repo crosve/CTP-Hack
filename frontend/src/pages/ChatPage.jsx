@@ -107,6 +107,7 @@ const ChatPage = ({ apiServer }) => {
         setLoading(false);
       });
       console.log("Received responses:", responses);
+      location.state = null;
     }
   }, [location.state]);
 
@@ -177,6 +178,11 @@ const ChatPage = ({ apiServer }) => {
             ))}
             <div ref={messagesEndRef} />
           </div>
+          {loading && (
+            <div className="flex items-start justify-center bg-gray-100 p-3">
+              <p className="text-base text-gray-500">Loading...</p>
+            </div>
+          )}
           <div className="flex items-center border-t border-gray-300 bg-gray-100 p-3 shadow-inner">
             <input
               type="text"
