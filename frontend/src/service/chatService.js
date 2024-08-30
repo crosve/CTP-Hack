@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const BACKEND_API = "http://127.0.0.1:5000/api/api/chat";
-const QUESIONARE_API = "http://127.0.0.1:5000/api/api/questionare";
+const BACKEND_API = "https://ctp-hack-wjfg.vercel.app/api/chat";
+const QUESIONARE_API = "https://ctp-hack-wjfg.vercel.app/api/questionare";
 
 class chatService {
   sendMessage(message) {
