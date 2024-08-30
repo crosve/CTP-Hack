@@ -12,7 +12,7 @@ messages = [{"role" : "system", "content": " You are a helpful and knowledgeable
 
 
 # Allow all methods and origins for the /api/* routes
-CORS(app, resources={r"/api/*": {"origins": "http://localhost:5173"}},
+CORS(app, resources={r"/api/*": {"origins": "*"}},
      methods=["GET", "POST"],
      allow_headers=["Content-Type"])
 
