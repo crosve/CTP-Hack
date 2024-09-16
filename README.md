@@ -6,8 +6,8 @@
 
 ## Prerequisites
 
-- Node.js and npm installed for the frontend.
-- Python 3.10.10 installed for the backend.
+- Node.js and npm are installed for the frontend.
+- Python 3.10.10 is installed for the backend.
 
 ### Frontend (React in Javascript)
 1. cd into the frontend repo
